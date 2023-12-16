@@ -1,3 +1,5 @@
+from pickle import load as pickle_load
+
 back_vowels = {'a', 'ı', 'o', 'u'}
 front_vowels = {'e', 'i', 'ö', 'ü'}
 vowels = back_vowels.union(front_vowels)
@@ -14,6 +16,13 @@ front_narrow_vowels = {'i', 'ü'}
 strong_consonants = {'k', 'ç', 'p', 't'}
 
 
+with open('nouns.pkl', 'rb') as f:
+    noun_dictionary = set(pickle_load(f))
+
+with open('verbs.pkl', 'rb') as f:
+    verb_dictionary = set(pickle_load(f))
+
+
 class TrieNode:
     
 
@@ -23,10 +32,15 @@ class TrieNode:
         self.is_suffix = False
         self.has_rules = False
 
+        self.is_noun_suffix, self.is_verb_suffix = False, False
 
-    def markSuffix(self, is_noun_suffix):
-        self.is_noun_suffix = is_noun_suffix
+
+    def markSuffix(self, is_noun_suffix, is_verb_suffix):
+        
+        self.is_noun_suffix, self.is_verb_suffix = is_noun_suffix, is_verb_suffix
+
         self.is_suffix = True
+
         if self.char in back_vowels:
             self.has_rules = True
             self.haplology_vowels = back_narrow_vowels
@@ -36,34 +50,52 @@ class TrieNode:
 
 
     # dictionary lookup will be added
-    def applyRules(self, word):
-        stem = word[:-1]
-        ## search in dictionary
-        #possible_words = [stem]
+    def applyRules(self, stem, possible_words=[]):
 
-        if stem[-1] in terminal_devoicing and self.is_noun_suffix: # ünsüz yumuşaması
-            possible_words.append(stem[:-1] + terminal_devoicing[stem[-1]])
-        else:
-            if not self.is_noun_suffix:
-                word_reverse = stem[::-1]
-                for char in word_reverse:
-                    if char in back_vowels:
-                        possible_words.append(stem[:-1] + 'a')
-                        break
-                    elif char in front_vowels:
-                        possible_words.append(stem[:-1] + 'e')
-                        break
-            else:
-                vowel_counter = 0
-                for letter in stem:
-                    vowel_counter += letter in vowels
-                    if vowel_counter > 1:
-                        break
-                if vowel_counter == 1 and stem[-1] not in vowels and stem[-2] not in vowels:
-                    for vowel in self.haplology_vowels:
-                        possible_words.append(stem[:-1] + vowel + stem[-1])
+        ## search in dictionary
+        if self.is_noun_suffix and stem in noun_dictionary:
+            possible_words.append(stem)
+
+        if self.is_verb_suffix and stem in verb_dictionary:
+            possible_words.append(stem)
+
+
+        # ünsüz yumuşaması
+        if stem[-1] in terminal_devoicing:
+            possible_word = stem[:-1] + terminal_devoicing[stem[-1]]
+            if possible_word in verb_dictionary or possible_word in noun_dictionary:
+                possible_words.append(possible_word)
+
+
+        # ünlü daralması
+        possible_word = None
+        if self.is_verb_suffix:
+            word_reverse = stem[::-1]
+            for char in word_reverse:
+                if char in back_vowels:
+                    possible_word = stem[:-1] + 'a'
+                elif char in front_vowels:
+                    possible_word = stem[:-1] + 'e'
+
+        if possible_word is not None and possible_word in verb_dictionary:
+            possible_words.append(possible_word)
+
+
+        # ünlü düşmesi
+        if self.is_noun_suffix:
+            vowel_counter = 0
+            for letter in stem:
+                vowel_counter += letter in vowels
+                if vowel_counter > 1:
+                    break
+            if vowel_counter == 1 and stem[-1] not in vowels and stem[-2] not in vowels:
+                for vowel in self.haplology_vowels:
+                    possible_word = stem[:-1] + vowel + stem[-1]
+                    if possible_word in noun_dictionary:
+                        possible_words.append(possible_word)
 
         return possible_words
+
 
 
 class Trie:
@@ -72,7 +104,7 @@ class Trie:
         self.root = TrieNode('')
 
 
-    def insertSuffix(self, suffix, is_noun_suffix):
+    def insertSuffix(self, suffix, is_noun_suffix, is_verb_suffix):
         current_node = self.root
         suffix = suffix[::-1]
 
@@ -85,7 +117,7 @@ class Trie:
                 current_node.children[char] = new_node
                 current_node = new_node
 
-        current_node.markSuffix(is_noun_suffix)
+        current_node.markSuffix(is_noun_suffix, is_verb_suffix)
 
 
     def countSuffixes(self, starting_node=None):
