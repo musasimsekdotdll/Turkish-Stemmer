@@ -151,3 +151,18 @@ class Trie:
             self.findSuffix(self.root.char, self.root.children[char], suffixes)
         
         print(suffixes)
+
+    def search(self, remaining_word, current_node, possible_words):
+        if current_node.isSuffix:
+            possible_words.extend(current_node.applyRules(remaining_word, possible_words))
+        for char in remaining_word[::-1]:
+            if char in current_node.children:
+                current_node = current_node.children[char]
+                self.search(remaining_word[:-1], current_node, possible_words)
+            else:
+                if current_node.isSuffix:
+                    current_node = self.root
+                    self.search(remaining_word[:-1], current_node, possible_words)
+                return
+
+        return
