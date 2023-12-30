@@ -50,21 +50,23 @@ class TrieNode:
 
 
     # dictionary lookup will be added
-    def applyRules(self, stem, possible_words=[]):
+    def applyRules(self, stem, possible_words=[], current_suffix=''):
 
         ## search in dictionary
         if self.is_noun_suffix and stem in noun_dictionary:
-            possible_words.append(stem)
+            possible_words.append((stem, current_suffix))
 
         if self.is_verb_suffix and stem in verb_dictionary:
-            possible_words.append(stem)
+            possible_words.append((stem, current_suffix))
+
 
 
         # ünsüz yumuşaması
         if stem[-1] in terminal_devoicing:
             possible_word = stem[:-1] + terminal_devoicing[stem[-1]]
             if possible_word in verb_dictionary or possible_word in noun_dictionary:
-                possible_words.append(possible_word)
+                possible_words.append((stem, current_suffix))
+
 
 
         # ünlü daralması
@@ -72,13 +74,17 @@ class TrieNode:
         if self.is_verb_suffix:
             word_reverse = stem[::-1]
             for char in word_reverse:
-                if char in back_vowels:
-                    possible_word = stem[:-1] + 'a'
-                elif char in front_vowels:
-                    possible_word = stem[:-1] + 'e'
+                if char in vowels:
+                    if char in back_narrow_vowels:
+                        possible_word = stem[:-1] + 'a'
+                    elif char in front_narrow_vowels:
+                        possible_word = stem[:-1] + 'e'
+
+                    break
 
         if possible_word is not None and possible_word in verb_dictionary:
-            possible_words.append(possible_word)
+            possible_words.append((stem, current_suffix))
+
 
 
         # ünlü düşmesi
@@ -92,7 +98,8 @@ class TrieNode:
                 for vowel in self.haplology_vowels:
                     possible_word = stem[:-1] + vowel + stem[-1]
                     if possible_word in noun_dictionary:
-                        possible_words.append(possible_word)
+                        possible_words.append((stem, current_suffix))
+
 
         return possible_words
 
@@ -102,6 +109,7 @@ class Trie:
 
     def __init__(self):
         self.root = TrieNode('')
+        # self.root.markSuffix(True, True)
 
 
     def insertSuffix(self, suffix, is_noun_suffix, is_verb_suffix):
@@ -152,17 +160,29 @@ class Trie:
         
         print(suffixes)
 
-    def search(self, remaining_word, current_node, possible_words):
-        if current_node.isSuffix:
-            possible_words.extend(current_node.applyRules(remaining_word, possible_words))
-        for char in remaining_word[::-1]:
-            if char in current_node.children:
-                current_node = current_node.children[char]
-                self.search(remaining_word[:-1], current_node, possible_words)
-            else:
-                if current_node.isSuffix:
-                    current_node = self.root
-                    self.search(remaining_word[:-1], current_node, possible_words)
-                return
+    def search(self, remaining_word, current_node, possible_words, suffix):
 
+        current_suffix = current_node.char + suffix
+        if len(remaining_word) < 3:
+            return
+        if current_node.is_suffix:
+            current_node.applyRules(remaining_word, possible_words, current_suffix)
+        char = remaining_word[-1]
+        if char in current_node.children:
+            current_node = current_node.children[char]
+            self.search(remaining_word[:-1], current_node, possible_words, current_suffix)
+        else:
+            return 
+        
+        if current_node.is_suffix:
+            self.search(remaining_word[:-1], self.root, possible_words, '-' + current_node.char + current_suffix)
         return
+    
+
+    def stem(self, word):
+        possible_words = []
+        if word in noun_dictionary or verb_dictionary:
+            possible_words = [(word, '')]
+
+        self.search(word, self.root, possible_words, '')
+        return possible_words
