@@ -1,4 +1,5 @@
 from pickle import load as pickle_load
+import pandas as pd
 
 back_vowels = {'a', 'ı', 'o', 'u'}
 front_vowels = {'e', 'i', 'ö', 'ü'}
@@ -109,6 +110,7 @@ class Trie:
 
     def __init__(self):
         self.root = TrieNode('')
+        self.loadSuffixes()
         # self.root.markSuffix(True, True)
 
 
@@ -126,6 +128,13 @@ class Trie:
                 current_node = new_node
 
         current_node.markSuffix(is_noun_suffix, is_verb_suffix)
+
+
+    def loadSuffixes(self):
+        df = pd.read_csv('turkish_inflectional_suffixes.csv')
+
+        for _, row in df.iterrows():
+            self.insertSuffix(row['suffix'], row['is_noun_suffix'], row['is_verb_suffix'])
 
 
     def countSuffixes(self, starting_node=None):

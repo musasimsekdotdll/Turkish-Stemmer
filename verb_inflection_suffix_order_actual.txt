@@ -1,0 +1,15 @@
+olumsuzluk + bildirme
+olumsuzluk + tasarlama
+
+bildirme + dilek-şart
+dilek-şart + geçmiş zaman
+
+(şimdi | gelecek | geniş) + geçmiş
+
+bildirme(öğrenilen geçmiş | şimdi | gelecek) + ek fiil
+gereklilik + ek fiil
+
+bildirme + kişi
+tasarlama + kişi
+
+kişi + ek fiil

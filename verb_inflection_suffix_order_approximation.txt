@@ -1,0 +1,36 @@
+olumsuzluk + bildirme (yapmamış)
+olumsuzluk + tasarlama (yapmamalı)
+
+bildirme + tasarlama (yapmışsa)
+tasarlama + bildirme (yapsaymış)
+
+bildirme + bildirme (yapmıştı)
+
+bildirme + ek fiil (yapmıştır)
+tasarlama + ek fiil (yapmalıdır)
+
+bildirme + kişi (yapmışım)
+tasarlama + kişi (yapsam)
+
+
+
+olumsuzluk + bildirme + tasarlama (yapmıyorsa)
+olumsuzluk + bildirme + bildirme (yapmamıştı)
+olumsuzluk + tasarlama + bildirme (yapmasaydı)
+olumsuzluk + bildirme + ek fiil (yapmayacaktır)
+olumsuzluk + tasarlama + ek fiil (yapmamalıdır)
+bildirme + tasarlama + kişi (yapmışsam)
+bildirme + bildirme + kişi (yapmıştım)
+tasarlama + bildirme + kişi (yapsaymışım)
+bildirme + kişi + ek fiil (yapmışımdır)
+tasarlama + kişi + ek fiil (yapmalıyımdır)
+olumsuzluk + bildirme + kişi (yapmadım)
+olumsuzluk + tasarlama + kişi (yapmasam)
+
+
+olumsuzluk + bildirme + tasarlama + kişi (yapmadıysam)
+olumsuzluk + bildirme + bildirme + kişi (yapmamıştım)
+olumsuzluk + bildirme + bildirme + tasarlama (yapacaktıysa)
+olumsuzluk + tasarlama + bildirme + kişi (yapmasaydım)
+olumsuzluk + bildirme + kişi + ek fiil (yapmamışımdır)
+

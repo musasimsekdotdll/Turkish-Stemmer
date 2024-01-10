@@ -1,0 +1,80 @@
+1. çoğul eki
+	- ler, lar
+
+
+2. iyelik ekleri
+	- birinci tekil: m, ım, im, um, üm
+
+	- ikinci tekil: n, ın, in, un, ün
+
+	- üçüncü tekil: ı, i, u, ü, sı, si, su, sü
+
+	- birinci çoğul: mız, miz, muz, müz, ımız, imiz, umuz, ümüz
+
+	- ikinci çoğul: nız, niz, nuz, nüz, ınız, iniz, unuz, ünüz
+
+	- üçüncü çoğul: leri, ları
+
+	- aitlik eki: ki
+
+
+3. hal ekleri
+
+	- belirtme: ı, i, u, ü, yı, yi, yu, yü, nı, ni, nu, nü
+
+	- yönelme: e, a, ye, ya, ne, na
+
+	- bulunma: de, da, te, ta, nde, nda
+
+	- ayrılma: den, dan, ten, tan, ndan, nden
+
+	- ilgi: ın, in, un, ün, nın, nin, nun, nün, 
+
+4. diğer
+	- vasıta: le, la, yle, yla
+
+// Fiil Çekim Ekleri
+
+5. Kişi ekleri
+
+	- teklik 1. Kişi: m, ım, im, um, üm, eyim, ayım, yeyim, yayım
+
+	- teklik 2. Kişi: n, sın, sin, sun, sün
+
+	- teklik 3. Kişi: sın, sin, sun, sün
+
+	- çokluk 1. Kişi: z (?), ız, iz, uz, üz, yız, yiz, yuz, yüz, k, elim, alım, yelim, yalım
+	
+	- çokluk 2. Kişi: sınız, siniz, sunuz, sünüz, nız, niz, nuz, nüz, ın, in, un, ün, yın, yin, yun, yün, ınız, iniz, unuz, ünüz
+
+	- çokluk 3. Kişi: ler, lar, sınlar, sinler, sunlar, sünler
+
+6. Kip ekleri
+
+	- bildirme ekleri:
+		
+		* görülen geçmiş zaman: dı, di, du, dü, tı, ti, tu, tü, ydı, ydi, ydu, ydü
+
+		* öğrenilen geçmiş zaman: mış, miş, muş, müş, ymış, ymiş, ymuş, ymüş
+
+		* şimdiki zaman: yor, iyor, ıyor, uyor, üyor, mekte, makta, mede, mada
+		
+		* gelecek zaman: ecek, acak, yecek, yacak
+
+		* geniş zaman: r, ır, ir, ur, ür, er, ar
+
+	- tasarlama kipleri:
+
+		* dilek-şart kipi: se, sa, yse, ysa
+
+		* gereklilik kipi: meli, malı
+
+		* istek kipi: e, a, ye, ya
+
+7. EK FİİL
+
+	- dır, dir, dur, dür, tır, tir, tur, tür
+
+8. Olumsuzluk eki (yapım eki aslında ama musa çok istedi)
+
+	- me, ma
