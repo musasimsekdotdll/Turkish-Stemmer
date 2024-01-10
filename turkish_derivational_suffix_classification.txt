@@ -1,0 +1,205 @@
+YAPIM EKLERİ
+
+ses olayları?:
+	- ağarmak (ak-ar-mak)
+	- oğlan (oğul-an)
+	- çabucak (çabuk-cak)
+	- daracık (dar-a-cık)
+	- gencecik (genç-e-cik)
+	- erkeğimsi (erkek-imsi)
+	- çevre (çevir-e)
+
+
+
+
+
+İsimden İsim Yapım Ekleri
+
+notlar:
+	- sızın, sizin (sız+ın) ansızın, durmaksızın
+	- dek, dak (de-k, da-k) fırıldak, ışıldak
+	- daki, deki (niteleme ön adı) (bahçedeki) (çekim ekleri)
+	- le, la (yer adı oluşturur) (yayla, kışla) (ile)
+	- leme, lama (le-me, la-ma) (çivileme, tepeleme)
+	- ler, lar (devrimciler, karahanlılar) (ler/lar)
+	- mser,msar yok; mse, msa fiil-isim yapım eki olmalı (kötümsemek var, iyimsemek yok)
+	- sızlık, sizlik ==> sız+lık, siz+lik
+	- batasıca, düşesice
+
+
+Kabul edilenler:
+- ce, ca, çe, ça (çince, aptalca, gökçe, yavaşça, batasıca) (557 sözcük)
+- cı, ci, cu, cü, çı, çi, çu, çü (arabacı, cumhuriyetçi) (1746 sözcük)
+- cık, cik, cuk, cük, çık, çik, çuk, çük (beyincik, küçücük, kurtçuk) (157 sözcük)
+- cıl, cil, cul, cül, çıl, çil, çul, çül (insancıl, etçil, kurtçul) (61 sözcük)
+- deş, daş, teş, taş (adaş, çağdaş, yurttaş, düşündeş, sesteş) (57 sözcük)
+- (???) ler, lar, gil, giller (dayımgil, köstebekgiller) (1 gil, 140 ler/lar, 175 giller)
+- l, el, al, ıl, il, ul, ül (yasal, bağıl, buzul) (72 sözcük)
+- lı, li, lu, lü (ikili, akıllı, turgutlu) (2331 sözcük)
+- lık, lik, luk, lük (aşağılık, kitaplık, günlük) (4952 sözcük)
+- msı, msi, msu, msü, ımsı, imsi, umsu, ümsü (kırmızımsı, köylümsü, güzelimsi) (100 sözcük)
+- sel, sal (duygusal, işitsel) (118 sözcük)
+- sı, si, su, sü (erkeksi, çocuksu) (126 sözcük)
+- sız, siz, suz, süz (acısız, yüzüksüz) (1392 sözcük)
+- (???) tı, ti, tu, tü (patırtı, fokurtu, elti, pinti) (84 sözcük)
+- (???) ır, ir, ur, ür (şıkır şıkır, zıpır, zangır zangır) (41 sözcük)
+
+
+Atlananlar:
+- (???) ık, ik, uk, ük ===> k, ek, ak, ık, ik, uk, ük (küçültme anlamı katar) (gıcırık, çıkrık ===> pısırık, bağışık, solak, yelek) (27 sözcük)
+- (???) ncı, nci, ıncı, inci, uncu, üncü (altıncı, dokuzuncu) (22 sözcük)
+- (???) ın, in, un, ün (ansızın, gündüzün, için için) (23 sözcük)
+- ceğiz, cağız (çocukcağız, köyceğiz) (toplam 7 sözcük, özel isimlere gelebiliyor: Bekirceğiz)
+- (???) eç, aç (kıraç, anaç) (toplam 17 sözcük)
+- (???) edek, adak (cumbadak, gümbedek, hoppadak, şakkadak) (toplam 17 sözcük)
+- ek, ak (benek, solak) (toplam 27 sözcük)
+- (???) er, ar, şer, şar(onar, beşer, yedişer, altışar) (toplam 23 adet sözcük)
+- e, a (toplam 4 sözcük) (ilke, töre)
+- eği, ağı (hiçbiri çıkmadı) (buzağı, kırağı)
+- en, an (toplam 5 sözcük) (köken, oğlan)
+- (???) ey, ay (güney, yüzey, birey) (10 sözcük)
+- cek, cak (yavrucak, ailecek, büyücek) (16 sözcük)
+- (???) lek, lak (evlek, gömlek, avlak, sulak) (12 sözcük)
+- (???) leyin (sabahleyin, gündüzleyin) (6 sözcük)
+- (???) mtırak, ımtırak, imtırak, umturak, ümturak (ekşimtırak, balımtırak, morumturak, çadırımtırak) (12 sözcük)
+- cın, cin (kuş adı türetir) (bıldırcın, güvercin) (toplam 6 sözcük) (8.yy öncesi çın/çin eki ile eşleşiyor olabilir)
+- dem, dam (konu türetir) (yordam, erdem, gündem) (5 sözcük) (8. yy öncesi)
+- dırık, dirik, duruk, dürük (insan ve hayvanlardaki organ adlarına eklenerek işin yapılmasını sağlayan araç, gereç adı türetir.) (boyunduruk, cibindirik) (7 sözcük) (8. yy öncesi)
+- dız, diz, duz, düz (gündüz, yıldız, kunduz) (3 sözcük) (8. yy öncesi)
+- lez, laz (aşağılama anlamı katar) (haylaz) (0 sözcük)
+- men, man (kişileri niteleyen anlam katar) (gökmen, kahraman) (21 sözcük) (8. yy öncesi)
+- re, ra (yön gösteren sözcük) (bura, taşra, nere) (5 + ora, şura, bura, nere) (8 sözcük)
+- sek, sak (benzerlik ve gibilik) (yakınsak, ıraksak) (5 sözcük) (8.yy makalesi) (birleşik ek ==> se-k, sa-k)
+- sık, sik, suk, sük (benzerlik) (sümsük) (0 sözcük) (8. yy makalesi)
+- sıl, sil, sul, sül (ilgili anlamı) (yoksul, damaksıl) (8 sözcük) (8. yy makalesi)
+- şın, şin (toplam 4 sözcük) (sarışın, akşın) (8. yy makalesi)
+- (???) t, et, at, ıt, it, ut, üt (toplam 15 sözcük) (boyut, yiğit, karşıt, özet, başat, yaşıt)
+- ız, iz, uz, üz (altız, yediz) (6 sözcük) (sadece sayılara geliyor)
+
+
+
+
+Fiilden İsim Yapım Ekleri
+
+Notlar:
+	- bildim bileli, oldum olalı(???)
+	- meç/maç ve emeç/amaç dokuz eylül tezinde ayrı ekler olarak değerlendirilmiş
+	- emek/amak ==> (e-mek/a-mak) (3 sözcük)
+	- (???) cesine/casına/çesine/çasına ==> (ce-si-ne) (ağlamışçasına)
+	- dık/dik/duk.. dan önce olumsuzluk eki gelebiliyor: dokunmadık yer, yıkılmadık bina
+	- (???) dıkça/dikçe... ==> dık-ça, dik-çe (bundan önce de olumsuzluk eki gelebiliyor) yapmadıkça
+	- dıkta/dikte/tıkta../dığımda/diğimde.. ==> dık-ım-da
+	- ışında,işinde,..,yışında,... ==> ış-ın-da (çıkışında, ağlayışında)
+	- mece,maca ==> me-ce, ma-ca (kovalamaca, bilmece)
+	- meden,madan olumsuzluk+ayrılma mı mastar+ayrılma mı
+	- mezlik,mazlık ==> mez-lik, maz-lık
+	- mlı,mli... ==> m-lı, m-li.. (alımlı, olumlu)
+
+
+Kabul Edilenler:
+- (???) ıcı, ici,...,yıcı, ..., yücü ==> [y]-ı-cı (bölücü, ezici, bakıcı, yanıcı) (355 sözcük)
+- k, ek, ak , ık, ik, uk, ük (ölçek, dönek, buruk) (374 sözcük)
+- m, ım, im, um, üm, em, am (anlam, durum, biçem) (323 sözcük)
+- meç, maç, emeç, amaç (bölmeç, yırtmaç, tutamaç) (2 + 25 sözcük)
+- en, an, yen, yan (düzen, ayran, tamlayan, sağlayan) (74 sözcük)
+- erek, arak, yerek, yarak (görerek, bekleyerek, tuzlayarak)
+- esi, ası (göresi gelmek, ağlayası tutmak)
+- dık, dik, duk, dük, tık, tik, tuk, tük
+- ge, ga, ke, ka (çizge, bölge, yerleşke) (30 sözcük)
+- gen, gan, ken, kan (çekingen, unutkan) (86 sözcük)
+- gı, gi, gu, gü, kı, ki, ku, kü (sorgu, askı, iletki) (96 sözcük)
+- (???) gın, gin, gun, gün, kın, kin, kun, kün (baskın, dingin) (98 sözcük)
+- (???) ı, i, u, ü (açı, duyu, duyuru) (113 sözcük)
+- k, ek, ak, ık, ik, uk, ük (cırtlak, cıvık, binek) (374 sözcük)
+- ıp, ip, up, üp, yıp, yip, yup, yüp
+- ken (açken, çocukken)
+- me, ma, mek, mak
+- meden, madan
+- mez, maz
+- mış, miş, muş, müş
+- r, er, ar, ır, ir, ur, ür
+- ış, iş, uş, üş, yış, yiş, yuş, yüş
+- (???) tı,ti,tu,tü,ntı,nti,ntu,ntü,ıntı,inti,untu,üntü (alıntı, bulantı, çöküntü) (188 sözcük)
+
+
+Atlananlar:
+- (???) sı, si, su, sü, esi, ası (giysi, olası, tütsü) (7 sözcük) (batasıca, devrilesice..)
+- (???) geç, gaç, keç, kaç (yüzgeç, kıskaç) (15 sözcük)
+- (???) ce, ca (eğlence, sakınca) (15 sözcük)
+- (???) dı, di, du, dü, tı, ti, tu, tü (mirasyedi, külbastı) (17 sözcük)
+- e, a, ye, ya (süre, doğa, itekleye itekleye) (11 sözcük)
+- ecek, acak, yecek, yacak (içecek, yiyecek, açacak) (22 sözcük)
+- (???) egen, agan, eğen, ağan (durağan, gezegen) (15 sözcük)
+- (???) ç, eç, aç, ıç, iç (güleç, bağlaç, usanç) (67 sözcük) (8. yy makalesi)
+- elge, alga (çizelge, genelge) (6 sözcük)
+- l, ıl, il, el, al (ek bulunamadı)
+- elek, alak (ek bulunamadı)
+- enek, anak (gelenek, sağanak) (15 sözcük) (dokuz eylül tezinin açıklamasına bak)
+- (???) cık, cik, cuk, cük, çık, çik, çuk, çük (öpücük, gülücük) (dokuz eylül tezinde ek bulunamadı)
+- gıç, giç, .. küç (başlangıç, dalgıç) (8. yy geç/gaç.../kaç ile ortak sayıyor) (13 sözcük)
+- (???) l, el, al, ıl, il, ul, ül (doğal, ışıl) (karışık mevzular) (14 sözcük)
+- men, man (araştırman, belletmen) (8. yy makalesi) (29 adet)
+- mer, mar (katmer, kuşmar, yağmur) (2 sözcük) (8. yy makalesi)
+- (???) mık, mik, muk, mük (atmık, kusmuk) (15 sözcük)
+- (???) ın,..ün (akın, gelin) (18 sözcük)
+- sek,sak (tutsak, aksak) (bulunamadı)
+- t, ıt,..,et,at (anıt, bayat) (38 sözcük) (dokuz eylül tezi)
+
+
+
+
+İsimden Fiil Yapım Ekleri
+
+Notlar:
+	- en, an ==> e-n, a-n (boşan, dilen, özen) (8. yy makalesi)
+	
+Kabul Edilenler:
+- (???) l, el, al (diril, çoğal, körel)
+- le, la (ağırla, boyala, başla, dışla)
+- leş, laş (sessizleş, kötüleş)
+- len, lan (ayaklan, dalgalan)
+- mse, msa (anımsa, benimse)
+
+
+Atlananlar:
+- (???) e, a, ı, i, u, ü (döşe, kına, oyna, yaşa) (8.yy makalesi)
+- (???) r, er, ar (karar, başar) (8. yy makalesi)
+- (???) eş, aş (savaş, güreş, dolaş)
+- (???) et, at (donat, yönet, ilet) (8.yy makalesi ed, ad benzerliği)
+- (???) de, da (fısılda, fokurda) (8. yy makalesi de, da benzerliği)
+- (???) ı,i,u,ü (doku, kaşı, taşı)
+- (???) k, ık, ik, uk, ük (acık, buruk?, gecik) (8. yy makalesi + fiilden isim yapan yapım eki de var)
+- (???) kır,kir,kur,kür (haykır, tükür, fışkır) (8. yy makalesi -ğar,-ğer eki benzerliği)
+- r, ır, ir, ur, ür (aksır, bağır, ısır) (8. yy makalesi)
+- rge, rga, ırga, irge, urga, ürge (esirge, yadırga) (8. yy makalesi)
+- re, ra (kükre, gevre) (8. yy makalesi)
+- se, sa (garipse, susa, duraksa) (8. yy makalesi)
+
+
+
+
+Fiilden Fiil Yapım Ekleri
+
+Notlar:
+	- ştır, ştir, ..ıştır,iştir... ==> ş-tır, ış-tır (araştır, çakıştır, soruştur)
+
+
+Kabul Edilenler:
+- ır, ir, ur, ür, dır, dir, dur, dür, tır, tir, tur, tür (daldır, sündür, açtır, koştur, duyur, geçir, bitir)
+- l, ıl, il (açıl, satıl, görül)
+- n, ın, in, un, ün, en, an (giyin, boşan, sürün)
+- ş, ış, iş, uş, üş (bakış, görüş, seviş)
+- me, ma (olumsuzluk)
+- t, ıt, it, ut, üt (acıt, boyat, ürküt, azıt)
+
+
+Atlananlar:
+- e, a (tıka) (başka örnek bile yok)
+- (???) ele, ala (eşele, gevele, kovala)
+- er, ar (çıkar, gider) (8. yy makalesi)
+- (???) der, dar (gönder, göster) (dır,dir.. ettirgenlik ekinin varyasyonu?)
+- (???) ı, i, u, ü (kazı, sürü?, bürü?, kürü?)
+- k, ık, ik, uk, ük (ayık, görük, kork) (8. yy makalesi)
+- (???) mele, mala (sarmala, tırmala)
+- (???) meş, maş (sarmaş, karmaş)
+- (???) p (serp, kırp)

@@ -1,0 +1,20 @@
+çokluk + hal
+çokluk + iyelik
+iyelik + hal
+
+çokluk + iyelik + hal
+çokluk + iyelik + hal + vasıta
+
+
+hal(bulunma | ilgi) + aitlik
+
+
+çokluk + iyelik + hal + aitlik + çokluk + hal
+çokluk + iyelik + hal + aitlik + çokluk + vasıta
+çokluk + iyelik + hal + aitlik + çokluk + iyelik + vasıta
+
+araba lar ım da ki ler i
+araba lar ım da ki ler le
+
+çokluk + iyelik + hal + aitlik + çokluk + hal + ek fiil
+çokluk + iyelik + hal + aitlik + çokluk + vasıta + ek fiil
