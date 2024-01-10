@@ -170,13 +170,15 @@ class Trie:
         print(suffixes)
 
     def search(self, remaining_word, current_node, possible_words, suffix):
-
         current_suffix = current_node.char + suffix
         if len(remaining_word) < 3:
             return
+            
         if current_node.is_suffix:
             current_node.applyRules(remaining_word, possible_words, current_suffix)
+
         char = remaining_word[-1]
+
         if char in current_node.children:
             current_node = current_node.children[char]
             self.search(remaining_word[:-1], current_node, possible_words, current_suffix)
