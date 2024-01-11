@@ -61,13 +61,11 @@ class TrieNode:
             possible_words.append((stem, current_suffix))
 
 
-
         # ünsüz yumuşaması
         if stem[-1] in terminal_devoicing:
             possible_word = stem[:-1] + terminal_devoicing[stem[-1]]
             if possible_word in verb_dictionary or possible_word in noun_dictionary:
                 possible_words.append((stem, current_suffix))
-
 
 
         # ünlü daralması
@@ -103,7 +101,6 @@ class TrieNode:
 
 
         return possible_words
-
 
 
 class Trie:
