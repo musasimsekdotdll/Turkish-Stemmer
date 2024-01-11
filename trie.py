@@ -306,7 +306,10 @@ class Trie:
             current_node = current_node.children[char]
             self.traverseTrie(remaining_word[:-1], current_node, root_node, possible_words, current_suffix, current_priority)
             if current_node.is_suffix and current_node.compare_priority < current_priority:
-                self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
+                if current_node.transit_priority >= current_priority:
+                    self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.compare_priority)
+                else:
+                    self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
                 return
         else:
             return 
