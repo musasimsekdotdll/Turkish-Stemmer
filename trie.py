@@ -45,7 +45,7 @@ class TrieNodeDerivational:
     def applyRules(self, stem, possible_words=[], current_suffix=''):
 
         ## search in dictionary
-
+        # print(stem, self.char, possible_words)
         if (self.input_form == 'N' and stem in noun_dictionary) or (self.input_form == 'V' and stem in verb_dictionary):
             possible_words.append((stem, current_suffix))
         else:
@@ -187,8 +187,8 @@ class TrieDerivational:
     def traverseTrie(self, remaining_word, current_node, possible_words, suffix, current_form):
         current_suffix = current_node.char + suffix
         if len(remaining_word) < 3:
-            return
-            
+            return True
+
         if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
             remaining_word = current_node.applyRules(remaining_word, possible_words, current_suffix)
 
@@ -196,11 +196,17 @@ class TrieDerivational:
 
         if char in current_node.children:
             current_node = current_node.children[char]
-            self.traverseTrie(remaining_word[:-1], current_node, possible_words, current_suffix, current_form)
+            found = self.traverseTrie(remaining_word[:-1], current_node, possible_words, current_suffix, current_form)
+
+            if not found and current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
+                self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form)
+                return True
+            
+            return True
         else:
             if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
                 self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form)
-                return
+                return True
 
 
 
