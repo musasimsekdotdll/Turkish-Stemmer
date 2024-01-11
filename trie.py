@@ -59,15 +59,15 @@ class TrieNode:
         if self.is_noun_suffix and stem in noun_dictionary:
             possible_words.append((stem, current_suffix))
 
-        if self.is_verb_suffix and stem in verb_dictionary:
+        if self.is_verb_suffix and stem in verb_dictionary and self.compare_priority <= 1:
             possible_words.append((stem, current_suffix))
 
 
         # ünsüz yumuşaması
         if stem[-1] in terminal_devoicing:
             possible_word = stem[:-1] + terminal_devoicing[stem[-1]]
-            if possible_word in verb_dictionary or possible_word in noun_dictionary:
-                possible_words.append((stem, current_suffix))
+            if possible_word in verb_dictionary or possible_word in noun_dictionary and self.compare_priority <= 1:
+                possible_words.append((possible_word, current_suffix))
 
 
         # ünlü daralması
@@ -83,8 +83,8 @@ class TrieNode:
 
                     break
 
-        if possible_word is not None and possible_word in verb_dictionary:
-            possible_words.append((stem, current_suffix))
+        if possible_word is not None and possible_word in verb_dictionary and self.compare_priority <= 1:
+            possible_words.append((possible_word, current_suffix))
 
 
         # ünlü düşmesi
@@ -98,7 +98,7 @@ class TrieNode:
                 for vowel in self.haplology_vowels:
                     possible_word = stem[:-1] + vowel + stem[-1]
                     if possible_word in noun_dictionary:
-                        possible_words.append((stem, current_suffix))
+                        possible_words.append((possible_word, current_suffix))
 
 
         return possible_words
@@ -113,9 +113,9 @@ class Trie:
 
 
     def insertSuffix(self, suffix, is_noun_suffix, is_verb_suffix, compare_noun_priority, transit_noun_priority, compare_verb_priority, transit_verb_priority):
+        suffix = suffix[::-1]
         if is_noun_suffix:
-            current_node = self.rootNoun
-            suffix = suffix[::-1]
+            current_node = self.rootNoun            
 
             for char in suffix:
                 if char in current_node.children:
@@ -125,11 +125,10 @@ class Trie:
                     current_node.children[char] = new_node
                     current_node = new_node
 
-            current_node.markSuffix(is_noun_suffix, is_verb_suffix, compare_noun_priority, transit_noun_priority)
+            current_node.markSuffix(is_noun_suffix, False, compare_noun_priority, transit_noun_priority)
 
         if is_verb_suffix:
             current_node = self.rootVerb
-            suffix = suffix[::-1]
 
             for char in suffix:
                 if char in current_node.children:
@@ -139,7 +138,7 @@ class Trie:
                     current_node.children[char] = new_node
                     current_node = new_node
 
-            current_node.markSuffix(is_noun_suffix, is_verb_suffix, compare_verb_priority, transit_verb_priority)
+            current_node.markSuffix(False, is_verb_suffix, compare_verb_priority, transit_verb_priority)
             
 
     def loadSuffixes(self):
@@ -184,6 +183,8 @@ class Trie:
         
     def search(self, stem):
         possible_words = []
+        if stem in verb_dictionary or stem in noun_dictionary:
+            possible_words.append((stem, ''))
         self.traverseTrie(stem, self.rootNoun, self.rootNoun, possible_words, "", 8)
         self.traverseTrie(stem, self.rootVerb, self.rootVerb, possible_words, "", 5)
 
