@@ -1,8 +1,8 @@
-1. çoğul eki
+1. Çoğul eki
 	- ler, lar
 
 
-2. iyelik ekleri
+2. İyelik ekleri
 	- birinci tekil: m, ım, im, um, üm
 
 	- ikinci tekil: n, ın, in, un, ün
@@ -18,7 +18,7 @@
 	- aitlik eki: ki
 
 
-3. hal ekleri
+3. Hal ekleri
 
 	- belirtme: ı, i, u, ü, yı, yi, yu, yü, nı, ni, nu, nü
 
@@ -30,7 +30,7 @@
 
 	- ilgi: ın, in, un, ün, nın, nin, nun, nün, 
 
-4. diğer
+4. Diğer
 	- vasıta: le, la, yle, yla
 
 // Fiil Çekim Ekleri
@@ -74,7 +74,3 @@
 7. EK FİİL
 
 	- dır, dir, dur, dür, tır, tir, tur, tür
-
-8. Olumsuzluk eki (yapım eki aslında ama musa çok istedi)
-
-	- me, ma
