@@ -1,5 +1,6 @@
 from pickle import load as pickle_load
 import pandas as pd
+from os.path import join as os_join
 
 back_vowels = {'a', 'ı', 'o', 'u'}
 front_vowels = {'e', 'i', 'ö', 'ü'}
@@ -142,7 +143,7 @@ class Trie:
             
 
     def loadSuffixes(self):
-        df = pd.read_csv('turkish_inflectional_suffixes.csv')
+        df = pd.read_csv(os_join('Suffixes', 'Inflectional', 'turkish_inflectional_suffixes.csv'))
 
         for _, row in df.iterrows():
             self.insertSuffix(row['suffix'], row['is_noun_suffix'], row['is_verb_suffix'], row['compare_noun_priority'], row['transit_noun_priority'], row['compare_verb_priority'], row['transit_verb_priority'])
@@ -186,6 +187,8 @@ class Trie:
         self.traverseTrie(stem, self.rootNoun, self.rootNoun, possible_words, "", 8)
         self.traverseTrie(stem, self.rootVerb, self.rootVerb, possible_words, "", 5)
 
+        return possible_words
+
 
     def traverseTrie(self, remaining_word, current_node, root_node, possible_words, suffix, current_priority):
         current_suffix = current_node.char + suffix
@@ -199,9 +202,9 @@ class Trie:
 
         if char in current_node.children:
             current_node = current_node.children[char]
-            self.search(remaining_word[:-1], current_node, possible_words, current_suffix, current_priority)
+            self.traverseTrie(remaining_word[:-1], current_node, root_node, possible_words, current_suffix, current_priority)
             if current_node.is_suffix and current_node.compare_priority < current_priority:
-                self.search(remaining_word[:-1], root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
+                self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
                 return
         else:
             return 
