@@ -185,13 +185,13 @@ class Trie:
         possible_words = []
         if stem in verb_dictionary or stem in noun_dictionary:
             possible_words.append((stem, ''))
-        self.traverseTrie(stem, self.rootNoun, self.rootNoun, possible_words, "", 8)
-        self.traverseTrie(stem, self.rootVerb, self.rootVerb, possible_words, "", 5)
+        self.traverseTrie(stem, self.rootNoun, self.rootNoun, possible_words, "", 8, False)
+        self.traverseTrie(stem, self.rootVerb, self.rootVerb, possible_words, "", 5, False)
 
         return possible_words
 
 
-    def traverseTrie(self, remaining_word, current_node, root_node, possible_words, suffix, current_priority):
+    def traverseTrie(self, remaining_word, current_node, root_node, possible_words, suffix, current_priority, is_kisi):
         current_suffix = current_node.char + suffix
         if len(remaining_word) < 3:
             return
@@ -203,9 +203,16 @@ class Trie:
 
         if char in current_node.children:
             current_node = current_node.children[char]
-            self.traverseTrie(remaining_word[:-1], current_node, root_node, possible_words, current_suffix, current_priority)
+            self.traverseTrie(remaining_word[:-1], current_node, root_node, possible_words, current_suffix, current_priority, is_kisi)
             if current_node.is_suffix and current_node.compare_priority < current_priority:
-                self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
+                if current_node.transit_priority == 6:
+                    if is_kisi:
+                        self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.compare_priority, is_kisi)
+                    else:
+                        is_kisi = True
+                        self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority, is_kisi)
+                else:
+                    self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority, is_kisi)
                 return
         else:
             return 
