@@ -25,6 +25,44 @@ with open('verbs.pkl', 'rb') as f:
     verb_dictionary = set(pickle_load(f))
 
 
+
+class TrieNodeDerivational:
+
+    def __init__(self, char):
+        self.char = char
+        self.children = {}
+        self.is_suffix = False
+
+    def markSuffix(self, input_form, output_form):
+        self.is_suffix = True
+
+        self.input_form, self.output_form = input_form, output_form
+    
+        if self.char in back_vowels or self.char in front_vowels:
+            self.has_rules = True
+
+    
+    def applyRules(self, stem, possible_words=[], current_suffix=''):
+
+        ## search in dictionary
+
+        if (self.input_form == 'N' and stem in noun_dictionary) or (self.input_form == 'V' and stem in verb_dictionary):
+            possible_words.append((stem, current_suffix))
+        else:
+            # ünsüz yumuşaması
+            if stem[-1] in terminal_devoicing:
+                possible_word = stem[:-1] + terminal_devoicing[stem[-1]]
+                if (possible_word in verb_dictionary and self.input_form == 'V') or (possible_word in noun_dictionary and self.input_form == 'N'):
+                    possible_words.append((possible_word, current_suffix))
+
+                stem = possible_word
+
+
+        return stem
+
+
+
+
 class TrieNode:
     
     def __init__(self, char):
@@ -66,7 +104,7 @@ class TrieNode:
         # ünsüz yumuşaması
         if stem[-1] in terminal_devoicing:
             possible_word = stem[:-1] + terminal_devoicing[stem[-1]]
-            if possible_word in verb_dictionary or possible_word in noun_dictionary and self.compare_priority <= 1:
+            if (possible_word in verb_dictionary or self.compare_priority <= 1) and possible_word in noun_dictionary:
                 possible_words.append((possible_word, current_suffix))
 
 
@@ -102,6 +140,69 @@ class TrieNode:
 
 
         return possible_words
+
+
+
+
+class TrieDerivational:
+
+    def __init__(self):
+        self.root = TrieNodeDerivational('')
+        self.loadSuffixes()
+
+
+    def insertSuffix(self, suffix, input_form, output_form):
+        suffix = suffix[::-1]
+        current_node = self.root            
+
+        for char in suffix:
+            if char in current_node.children:
+                current_node = current_node.children[char]
+            else:
+                new_node = TrieNodeDerivational(char)
+                current_node.children[char] = new_node
+                current_node = new_node
+
+        current_node.markSuffix(input_form, output_form)
+
+
+
+    def loadSuffixes(self):
+        df = pd.read_csv(os_join('Suffixes', 'Derivational', 'turkish_derivational_suffixes.csv'))
+
+        for _, row in df.iterrows():
+            self.insertSuffix(row['suffix'], row['input_form'], row['output_form'])
+
+
+
+    def search(self, stem):
+        possible_words = []
+        if stem in verb_dictionary or stem in noun_dictionary:
+            possible_words.append((stem, ''))
+        self.traverseTrie(stem, self.root, possible_words, "", '')
+
+        return possible_words
+
+
+    def traverseTrie(self, remaining_word, current_node, possible_words, suffix, current_form):
+        current_suffix = current_node.char + suffix
+        if len(remaining_word) < 3:
+            return
+            
+        if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
+            remaining_word = current_node.applyRules(remaining_word, possible_words, current_suffix)
+
+        char = remaining_word[-1]
+
+        if char in current_node.children:
+            current_node = current_node.children[char]
+            self.traverseTrie(remaining_word[:-1], current_node, possible_words, current_suffix, current_form)
+            if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
+                self.traverseTrie(remaining_word[:-1], self.root, possible_words, '-' + current_node.char + current_suffix, current_node.input_form)
+                return
+        else:
+            return
+
 
 
 class Trie:
