@@ -26,7 +26,6 @@ with open('verbs.pkl', 'rb') as f:
 
 class TrieNode:
     
-
     def __init__(self, char):
         self.char = char
         self.children = {}
@@ -34,11 +33,13 @@ class TrieNode:
         self.has_rules = False
 
         self.is_noun_suffix, self.is_verb_suffix = False, False
+        self.compare_priority, self.transit_priority = 0, 0
 
 
-    def markSuffix(self, is_noun_suffix, is_verb_suffix):
+    def markSuffix(self, is_noun_suffix, is_verb_suffix, compare_priority, transit_priority):
         
         self.is_noun_suffix, self.is_verb_suffix = is_noun_suffix, is_verb_suffix
+        self.compare_priority, self.transit_priority = compare_priority, transit_priority
 
         self.is_suffix = True
 
@@ -85,7 +86,6 @@ class TrieNode:
             possible_words.append((stem, current_suffix))
 
 
-
         # ünlü düşmesi
         if self.is_noun_suffix:
             vowel_counter = 0
@@ -106,32 +106,46 @@ class TrieNode:
 class Trie:
 
     def __init__(self):
-        self.root = TrieNode('')
+        self.rootNoun = TrieNode('')
+        self.rootVerb = TrieNode('')
         self.loadSuffixes()
-        # self.root.markSuffix(True, True)
 
 
-    def insertSuffix(self, suffix, is_noun_suffix, is_verb_suffix):
-        current_node = self.root
-        suffix = suffix[::-1]
+    def insertSuffix(self, suffix, is_noun_suffix, is_verb_suffix, compare_noun_priority, transit_noun_priority, compare_verb_priority, transit_verb_priority):
+        if is_noun_suffix:
+            current_node = self.rootNoun
+            suffix = suffix[::-1]
 
+            for char in suffix:
+                if char in current_node.children:
+                    current_node = current_node.children[char]
+                else:
+                    new_node = TrieNode(char)
+                    current_node.children[char] = new_node
+                    current_node = new_node
 
-        for char in suffix:
-            if char in current_node.children:
-                current_node = current_node.children[char]
-            else:
-                new_node = TrieNode(char)
-                current_node.children[char] = new_node
-                current_node = new_node
+            current_node.markSuffix(is_noun_suffix, is_verb_suffix, compare_noun_priority, transit_noun_priority)
 
-        current_node.markSuffix(is_noun_suffix, is_verb_suffix)
+        if is_verb_suffix:
+            current_node = self.rootVerb
+            suffix = suffix[::-1]
 
+            for char in suffix:
+                if char in current_node.children:
+                    current_node = current_node.children[char]
+                else:
+                    new_node = TrieNode(char)
+                    current_node.children[char] = new_node
+                    current_node = new_node
+
+            current_node.markSuffix(is_noun_suffix, is_verb_suffix, compare_verb_priority, transit_verb_priority)
+            
 
     def loadSuffixes(self):
         df = pd.read_csv('turkish_inflectional_suffixes.csv')
 
         for _, row in df.iterrows():
-            self.insertSuffix(row['suffix'], row['is_noun_suffix'], row['is_verb_suffix'])
+            self.insertSuffix(row['suffix'], row['is_noun_suffix'], row['is_verb_suffix'], row['compare_noun_priority'], row['transit_noun_priority'], row['compare_verb_priority'], row['transit_verb_priority'])
 
 
     def countSuffixes(self, starting_node=None):
@@ -166,25 +180,33 @@ class Trie:
         
         print(suffixes)
 
-    def search(self, remaining_word, current_node, possible_words, suffix):
+        
+    def search(self, stem):
+        possible_words = []
+        self.traverseTrie(stem, self.rootNoun, self.rootNoun, possible_words, "", 8)
+        self.traverseTrie(stem, self.rootVerb, self.rootVerb, possible_words, "", 5)
+
+
+    def traverseTrie(self, remaining_word, current_node, root_node, possible_words, suffix, current_priority):
         current_suffix = current_node.char + suffix
         if len(remaining_word) < 3:
             return
             
-        if current_node.is_suffix:
+        if current_node.is_suffix and current_node.compare_priority < current_priority:
             current_node.applyRules(remaining_word, possible_words, current_suffix)
 
         char = remaining_word[-1]
 
         if char in current_node.children:
             current_node = current_node.children[char]
-            self.search(remaining_word[:-1], current_node, possible_words, current_suffix)
+            self.search(remaining_word[:-1], current_node, possible_words, current_suffix, current_priority)
+            if current_node.is_suffix and current_node.compare_priority < current_priority:
+                self.search(remaining_word[:-1], root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
+                return
         else:
             return 
         
-        if current_node.is_suffix:
-            self.search(remaining_word[:-1], self.root, possible_words, '-' + current_node.char + current_suffix)
-        return
+        
     
 
     def stem(self, word):
