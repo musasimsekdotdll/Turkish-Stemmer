@@ -194,6 +194,14 @@ ntü,V,N
 inti,V,N
 untu,V,N
 üntü,V,N
+ınca,V,N
+ince,V,N
+unca,V,N
+ünce,V,N
+yınca,V,N
+yince,V,N
+yunca,V,N
+yünce,V,N
 l,N,V
 el,N,V
 al,N,V
@@ -237,3 +245,11 @@ t,V,V
 it,V,V
 ut,V,V
 üt,V,V
+ebil,V,V
+abil,V,V
+yebil,V,V
+yabil,V,V
+eme,V,V
+ama,V,V
+yeme,V,V
+yama,V,V

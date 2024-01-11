@@ -55,7 +55,7 @@ class TrieNodeDerivational:
                 if (possible_word in verb_dictionary and self.input_form == 'V') or (possible_word in noun_dictionary and self.input_form == 'N'):
                     possible_words.append((possible_word, current_suffix))
 
-                stem = possible_word
+                    stem = possible_word
 
 
         return stem
@@ -197,11 +197,10 @@ class TrieDerivational:
         if char in current_node.children:
             current_node = current_node.children[char]
             self.traverseTrie(remaining_word[:-1], current_node, possible_words, current_suffix, current_form)
-            if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
-                self.traverseTrie(remaining_word[:-1], self.root, possible_words, '-' + current_node.char + current_suffix, current_node.input_form)
-                return
         else:
-            return
+            if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
+                self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form)
+                return
 
 
 
@@ -312,10 +311,10 @@ class Trie:
                     self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
                 return
         else:
-            return 
-        
-        
-    
+            return
+
+
+
 
     def stem(self, word):
         possible_words = []
