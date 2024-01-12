@@ -45,9 +45,10 @@ class TrieNodeDerivational:
     def applyRules(self, stem, possible_words=[], current_suffix=''):
 
         ## search in dictionary
-        # print(stem, self.char, possible_words)
+        found = False
         if (self.input_form == 'N' and stem in noun_dictionary) or (self.input_form == 'V' and stem in verb_dictionary):
             possible_words.append((stem, current_suffix))
+            found = True
         else:
             # ünsüz yumuşaması
             if stem[-1] in terminal_devoicing:
@@ -56,15 +57,16 @@ class TrieNodeDerivational:
                     possible_words.append((possible_word, current_suffix))
 
                     stem = possible_word
+                    found = True
 
 
-        return stem
+        return stem, found
 
 
 
 
-class TrieNode:
-    
+class TrieNodeInflectional:
+
     def __init__(self, char):
         self.char = char
         self.children = {}
@@ -187,34 +189,34 @@ class TrieDerivational:
     def traverseTrie(self, remaining_word, current_node, possible_words, suffix, current_form):
         current_suffix = current_node.char + suffix
         if len(remaining_word) < 3:
-            return True
+            return False
 
+        dictionary_match = False
         if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
-            remaining_word = current_node.applyRules(remaining_word, possible_words, current_suffix)
+            remaining_word, dictionary_match = current_node.applyRules(remaining_word, possible_words, current_suffix)
+            print(current_suffix, possible_words)
 
         char = remaining_word[-1]
 
         if char in current_node.children:
-            current_node = current_node.children[char]
-            found = self.traverseTrie(remaining_word[:-1], current_node, possible_words, current_suffix, current_form)
+            next_node = current_node.children[char]
+            longer_found = self.traverseTrie(remaining_word[:-1], next_node, possible_words, current_suffix, current_form)
 
-            if not found and current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
-                self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form)
-                return True
+            if (not longer_found) and current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
+                return self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form) or dictionary_match
             
-            return True
+            return longer_found
         else:
             if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
-                self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form)
-                return True
+                return self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form) or dictionary_match
 
 
 
-class Trie:
+class TrieInflectional:
 
     def __init__(self):
-        self.rootNoun = TrieNode('')
-        self.rootVerb = TrieNode('')
+        self.rootNoun = TrieNodeInflectional('')
+        self.rootVerb = TrieNodeInflectional('')
         self.loadSuffixes()
 
 
@@ -227,7 +229,7 @@ class Trie:
                 if char in current_node.children:
                     current_node = current_node.children[char]
                 else:
-                    new_node = TrieNode(char)
+                    new_node = TrieNodeInflectional(char)
                     current_node.children[char] = new_node
                     current_node = new_node
 
@@ -240,7 +242,7 @@ class Trie:
                 if char in current_node.children:
                     current_node = current_node.children[char]
                 else:
-                    new_node = TrieNode(char)
+                    new_node = TrieNodeInflectional(char)
                     current_node.children[char] = new_node
                     current_node = new_node
 
