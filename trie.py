@@ -95,36 +95,25 @@ class TrieNodeInflectional:
     # dictionary lookup will be added
     def applyRules(self, stem, possible_words=[], current_suffix=''):
 
-        ## search in dictionary
-        if self.is_noun_suffix and stem in noun_dictionary:
-            possible_words.append((stem, current_suffix))
-
-        if self.is_verb_suffix and stem in verb_dictionary and self.compare_priority <= 1:
-            possible_words.append((stem, current_suffix))
-
+        suffix = '-' + current_suffix
+        possible_words.append((stem, suffix))
 
         # ünsüz yumuşaması
         if stem[-1] in terminal_devoicing:
             possible_word = stem[:-1] + terminal_devoicing[stem[-1]]
-            if (possible_word in verb_dictionary or self.compare_priority <= 1) and possible_word in noun_dictionary:
-                possible_words.append((possible_word, current_suffix))
+            possible_words.append((possible_word, suffix))
 
 
         # ünlü daralması
         possible_word = None
-        if self.is_verb_suffix:
-            word_reverse = stem[::-1]
-            for char in word_reverse:
-                if char in vowels:
-                    if char in back_narrow_vowels:
-                        possible_word = stem[:-1] + 'a'
-                    elif char in front_narrow_vowels:
-                        possible_word = stem[:-1] + 'e'
+        if self.is_verb_suffix and stem[-1] in vowels:
+            if stem[-1] in back_narrow_vowels:
+                possible_word = stem[:-1] + 'a'
+            elif stem[-1] in front_narrow_vowels:
+                possible_word = stem[:-1] + 'e'
 
-                    break
-
-        if possible_word is not None and possible_word in verb_dictionary and self.compare_priority <= 1:
-            possible_words.append((possible_word, current_suffix))
+        if possible_word is not None and self.compare_priority <= 1:
+            possible_words.append((possible_word, suffix))
 
 
         # ünlü düşmesi
@@ -137,12 +126,7 @@ class TrieNodeInflectional:
             if vowel_counter == 1 and stem[-1] not in vowels and stem[-2] not in vowels:
                 for vowel in self.haplology_vowels:
                     possible_word = stem[:-1] + vowel + stem[-1]
-                    if possible_word in noun_dictionary:
-                        possible_words.append((possible_word, current_suffix))
-
-
-        return possible_words
-
+                    possible_words.append((possible_word, suffix))
 
 
 
@@ -177,11 +161,11 @@ class TrieDerivational:
 
 
 
-    def search(self, stem):
+    def search(self, stem, suffix_accumulation):
         possible_words = []
         if stem in verb_dictionary or stem in noun_dictionary:
-            possible_words.append((stem, ''))
-        self.traverseTrie(stem, self.root, possible_words, "", '')
+            possible_words.append((stem, suffix_accumulation))
+        self.traverseTrie(stem, self.root, possible_words, suffix_accumulation, '')
 
         return possible_words
 
@@ -194,7 +178,6 @@ class TrieDerivational:
         dictionary_match = False
         if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
             remaining_word, dictionary_match = current_node.applyRules(remaining_word, possible_words, current_suffix)
-            print(current_suffix, possible_words)
 
         char = remaining_word[-1]
 
@@ -290,9 +273,7 @@ class TrieInflectional:
 
         
     def search(self, stem):
-        possible_words = []
-        if stem in verb_dictionary or stem in noun_dictionary:
-            possible_words.append((stem, ''))
+        possible_words = [(stem, '')]
         self.traverseTrie(stem, self.rootNoun, self.rootNoun, possible_words, "", 8)
         self.traverseTrie(stem, self.rootVerb, self.rootVerb, possible_words, "", 5)
 
@@ -313,7 +294,7 @@ class TrieInflectional:
             current_node = current_node.children[char]
             self.traverseTrie(remaining_word[:-1], current_node, root_node, possible_words, current_suffix, current_priority)
             if current_node.is_suffix and current_node.compare_priority < current_priority:
-                if current_node.transit_priority >= current_priority:
+                if current_node.transit_priority >= current_priority and current_node.compare_priority > 0:
                     self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.compare_priority)
                 else:
                     self.traverseTrie(remaining_word[:-1], root_node, root_node, possible_words, '-' + current_node.char + current_suffix, current_node.transit_priority)
@@ -324,10 +305,16 @@ class TrieInflectional:
 
 
 
-    def stem(self, word):
-        possible_words = []
-        if word in noun_dictionary or verb_dictionary:
-            possible_words = [(word, '')]
+trie_inflectional = TrieInflectional()
+trie_derivational = TrieDerivational()
+def searchStems(input: str):
+    dictionary_results = []
 
-        self.search(word, self.root, possible_words, '')
-        return possible_words
+
+    possible_words = trie_inflectional.search(input)
+    for possible_word in possible_words:
+        print(possible_word)
+        dictionary_matches = trie_derivational.search(possible_word[0], possible_word[1])
+        dictionary_results = dictionary_results + dictionary_matches
+
+    return dictionary_results
