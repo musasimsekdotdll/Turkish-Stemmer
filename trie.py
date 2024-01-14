@@ -18,10 +18,10 @@ front_narrow_vowels = {'i', 'ü'}
 strong_consonants = {'k', 'ç', 'p', 't'}
 
 
-with open('nouns.pkl', 'rb') as f:
+with open(os_join('dictionary', 'nouns.pkl'), 'rb') as f:
     noun_dictionary = set(pickle_load(f))
 
-with open('verbs.pkl', 'rb') as f:
+with open(os_join('dictionary', 'verbs.pkl'), 'rb') as f:
     verb_dictionary = set(pickle_load(f))
 
 
@@ -83,6 +83,7 @@ class TrieNodeInflectional:
         self.compare_priority, self.transit_priority = compare_priority, transit_priority
 
         self.is_suffix = True
+        self.haplology_vowels = {}
 
         if self.char in back_vowels:
             self.has_rules = True
@@ -163,14 +164,16 @@ class TrieDerivational:
 
     def search(self, stem, suffix_accumulation):
         possible_words = []
+        possible_roots = []
         if stem in verb_dictionary or stem in noun_dictionary:
             possible_words.append((stem, suffix_accumulation))
-        self.traverseTrie(stem, self.root, possible_words, suffix_accumulation, '')
+            possible_roots.append(stem)
+        self.traverseTrie(stem, self.root, possible_words, possible_roots, suffix_accumulation, '')
 
-        return possible_words
+        return possible_words, possible_roots
 
 
-    def traverseTrie(self, remaining_word, current_node, possible_words, suffix, current_form):
+    def traverseTrie(self, remaining_word, current_node, possible_words, possible_roots, suffix, current_form):
         current_suffix = current_node.char + suffix
         if len(remaining_word) < 2:
             return False
@@ -183,19 +186,21 @@ class TrieDerivational:
 
         if char in current_node.children:
             next_node = current_node.children[char]
-            longer_found = self.traverseTrie(remaining_word[:-1], next_node, possible_words, current_suffix, current_form)
+            longer_found = self.traverseTrie(remaining_word[:-1], next_node, possible_words, possible_roots, current_suffix, current_form)
 
             if (not longer_found) and current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
                 if dictionary_match:
                     possible_words.append((remaining_word, '-' + current_suffix))
-                return self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form) or dictionary_match
+                    possible_roots.append(remaining_word)
+                return self.traverseTrie(remaining_word, self.root, possible_words, possible_roots, '-' + current_suffix, current_node.input_form) or dictionary_match
             
             return longer_found
         else:
             if current_node.is_suffix and (current_node.output_form == current_form or current_form == ''):
                 if dictionary_match:
                     possible_words.append((remaining_word, '-' + current_suffix))
-                return self.traverseTrie(remaining_word, self.root, possible_words, '-' + current_suffix, current_node.input_form) or dictionary_match
+                    possible_roots.append(remaining_word)
+                return self.traverseTrie(remaining_word, self.root, possible_words, possible_roots, '-' + current_suffix, current_node.input_form) or dictionary_match
 
 
 
@@ -342,9 +347,11 @@ trie_derivational = TrieDerivational()
 def searchStems(input: str):
     dictionary_results = []
 
-    possible_words = trie_inflectional.search(input)
+    possible_words, possible_roots = trie_inflectional.search(input), []
     for possible_word in possible_words:
-        dictionary_matches = trie_derivational.search(possible_word[0], possible_word[1])
-        dictionary_results = dictionary_results + dictionary_matches
+        dictionary_matches, dictionary_roots = trie_derivational.search(possible_word[0], possible_word[1])
 
-    return set(dictionary_results)
+        dictionary_results = dictionary_results + dictionary_matches
+        possible_roots += dictionary_roots
+
+    return set(dictionary_results), set(possible_roots)
