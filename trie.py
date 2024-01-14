@@ -18,10 +18,10 @@ front_narrow_vowels = {'i', 'ü'}
 strong_consonants = {'k', 'ç', 'p', 't'}
 
 
-with open('nouns.pkl', 'rb') as f:
+with open(os_join('dictionary', 'nouns.pkl'), 'rb') as f:
     noun_dictionary = set(pickle_load(f))
 
-with open('verbs.pkl', 'rb') as f:
+with open(os_join('dictionary', 'verbs.pkl'), 'rb') as f:
     verb_dictionary = set(pickle_load(f))
 
 
